@@ -30,29 +30,29 @@ export default function CounselorProfile() {
     fetchCounselor();
   }, [id]);
 
-  // useEffect(() => {
-  //   if (selectedDate && counselor) {
-  //     // Filter available slots for selected date
-  //     const slots = counselor.availableSlots
-  //       .filter((slot) => slot.startsWith(selectedDate))
-  //       .map((slot) => slot.split("T")[1]);
-  //     setAvailableSlots(slots);
-  //     setSelectedTime("");
-  //   }
-  // }, [selectedDate, counselor]);
-
   useEffect(() => {
     if (selectedDate && counselor) {
-      const selected = new Date(selectedDate).toDateString();
-
+      // Filter available slots for selected date
       const slots = counselor.availableSlots
-        .filter((slot) => new Date(slot).toDateString() === selected)
-        .map((slot) => slot.split("T")[1].slice(0, 5)); // HH:MM format
-
+        .filter((slot) => slot.startsWith(selectedDate))
+        .map((slot) => slot.split("T")[1]);
       setAvailableSlots(slots);
       setSelectedTime("");
     }
   }, [selectedDate, counselor]);
+
+  // useEffect(() => {
+  //   if (selectedDate && counselor) {
+  //     const selected = new Date(selectedDate).toDateString();
+
+  //     const slots = counselor.availableSlots
+  //       .filter((slot) => new Date(slot).toDateString() === selected)
+  //       .map((slot) => slot.split("T")[1].slice(0, 5)); // HH:MM format
+
+  //     setAvailableSlots(slots);
+  //     setSelectedTime("");
+  //   }
+  // }, [selectedDate, counselor]);
 
   const handleBookAppointment = async () => {
     if (!selectedDate || !selectedTime || !sessionType) {
