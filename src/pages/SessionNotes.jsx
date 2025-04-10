@@ -16,8 +16,12 @@ export default function SessionNotes() {
     const fetchData = async () => {
       try {
         const [notesRes, appointmentRes] = await Promise.all([
-          axios.get(`/api/session-notes/appointment/${id}`),
-          axios.get(`/api/appointments/${id}`),
+          axios.get(
+            `https://counseling-app-backend.onrender.com/api/session-notes/appointment/${id}`
+          ),
+          axios.get(
+            `https://counseling-app-backend.onrender.com/api/appointments/${id}`
+          ),
         ]);
         setNotes(notesRes.data);
         setAppointment(appointmentRes.data);
@@ -39,10 +43,13 @@ export default function SessionNotes() {
     }
 
     try {
-      const res = await axios.post("/api/session-notes", {
-        appointment: id,
-        notes: newNote,
-      });
+      const res = await axios.post(
+        "https://counseling-app-backend.onrender.com/api/session-notes",
+        {
+          appointment: id,
+          notes: newNote,
+        }
+      );
       setNotes([res.data, ...notes]);
       setNewNote("");
       setError("");

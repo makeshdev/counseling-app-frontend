@@ -10,7 +10,8 @@ export default function Counselors() {
   useEffect(() => {
     const fetchCounselors = async () => {
       try {
-        let url = "/api/users/counselors";
+        let url =
+          "https://counseling-app-backend.onrender.com/api/users/counselors";
         if (specialization) {
           url += `?specialization=${specialization}`;
         }

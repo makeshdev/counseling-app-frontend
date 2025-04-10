@@ -16,7 +16,9 @@ export default function CounselorProfile() {
   useEffect(() => {
     const fetchCounselor = async () => {
       try {
-        const res = await axios.get(`/api/users/counselors/${id}`);
+        const res = await axios.get(
+          `https://counseling-app-backend.onrender.com/api/users/counselors/${id}`
+        );
         setCounselor(res.data);
       } catch (err) {
         console.error(err);
@@ -46,14 +48,17 @@ export default function CounselorProfile() {
     }
 
     try {
-      const res = await axios.post("/api/appointments", {
-        counselor: id,
-        date: selectedDate,
-        time: selectedTime,
-        type: sessionType,
-      });
+      const res = await axios.post(
+        "https://counseling-app-backend.onrender.com/api/appointments",
+        {
+          counselor: id,
+          date: selectedDate,
+          time: selectedTime,
+          type: sessionType,
+        }
+      );
       // Redirect to payment page or show success message
-      window.location.href = `/payments?appointment=${res.data._id}`;
+      window.location.href = `https://your-backend.com/api/payments?appointment=${res.data._id}`;
     } catch (err) {
       setError(err.response?.data?.msg || "Failed to book appointment");
       console.error(err);

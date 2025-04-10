@@ -28,8 +28,10 @@ export default function Payments() {
     const fetchData = async () => {
       try {
         const [appointmentRes, paymentRes] = await Promise.all([
-          axios.get(`/api/appointments/${appointmentId}`),
-          axios.get("/api/payments"),
+          axios.get(
+            `https://counseling-app-backend.onrender.com/api/appointments/${appointmentId}`
+          ),
+          axios.get("https://counseling-app-backend.onrender.com/api/payments"),
         ]);
 
         // Check if payment already exists for this appointment
@@ -45,7 +47,7 @@ export default function Payments() {
 
         // Create payment intent
         const intentRes = await axios.post(
-          "/api/payments/create-payment-intent",
+          "https://counseling-app-backend.onrender.com/api/payments/create-payment-intent",
           {
             appointment: appointmentId,
             amount: 50, // Fixed amount for demo
@@ -86,12 +88,15 @@ export default function Payments() {
       }
 
       // Confirm payment on our server
-      await axios.post("/api/payments/confirm", {
-        appointment: appointmentId,
-        amount: 50,
-        paymentMethod: "card",
-        transactionId: paymentIntent.id,
-      });
+      await axios.post(
+        "https://counseling-app-backend.onrender.com/api/payments/confirm",
+        {
+          appointment: appointmentId,
+          amount: 50,
+          paymentMethod: "card",
+          transactionId: paymentIntent.id,
+        }
+      );
 
       setPaymentSuccess(true);
       setTimeout(() => {

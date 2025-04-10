@@ -13,7 +13,9 @@ export default function Appointments() {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const res = await axios.get("/api/appointments");
+        const res = await axios.get(
+          "https://counseling-app-backend.onrender.com/api/appointments"
+        );
         setAppointments(res.data);
       } catch (err) {
         console.error(err);
@@ -32,9 +34,12 @@ export default function Appointments() {
 
   const cancelAppointment = async (id) => {
     try {
-      await axios.put(`/api/appointments/${id}/status`, {
-        status: "cancelled",
-      });
+      await axios.put(
+        `https://counseling-app-backend.onrender.com/api/appointments/${id}/status`,
+        {
+          status: "cancelled",
+        }
+      );
       setAppointments((prev) =>
         prev.map((app) =>
           app._id === id ? { ...app, status: "cancelled" } : app

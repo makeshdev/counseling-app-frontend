@@ -11,7 +11,9 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const res = await axios.get("/api/appointments");
+        const res = await axios.get(
+          "https://counseling-app-backend.onrender.com/api/appointments"
+        );
         setAppointments(res.data);
       } catch (err) {
         console.error(err);

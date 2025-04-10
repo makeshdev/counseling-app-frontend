@@ -24,7 +24,9 @@ export default function VideoCall() {
     const initializeCall = async () => {
       try {
         // Get appointment details
-        const res = await axios.get(`/api/appointments/${id}`);
+        const res = await axios.get(
+          `https://counseling-app-backend.onrender.com/api/appointments/${id}`
+        );
 
         // Initialize WebRTC
         const stream = await navigator.mediaDevices.getUserMedia({

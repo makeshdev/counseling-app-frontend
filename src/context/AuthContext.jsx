@@ -26,7 +26,9 @@ export function AuthProvider({ children }) {
   const loadUser = async () => {
     try {
       setAuthToken(token);
-      const res = await axios.get("/api/users/me");
+      const res = await axios.get(
+        "https://counseling-app-backend.onrender.com/api/users/me"
+      );
       setUser(res.data);
       setIsAuthenticated(true);
     } catch (err) {
@@ -40,7 +42,10 @@ export function AuthProvider({ children }) {
   // Register user
   const register = async (formData) => {
     try {
-      const res = await axios.post("/api/auth/register", formData);
+      const res = await axios.post(
+        "https://counseling-app-backend.onrender.com/api/auth/register",
+        formData
+      );
       setToken(res.data.token);
       await loadUser();
       navigate("/dashboard");
@@ -52,7 +57,10 @@ export function AuthProvider({ children }) {
   // Login user
   const login = async (formData) => {
     try {
-      const res = await axios.post("/api/auth/login", formData);
+      const res = await axios.post(
+        "https://counseling-app-backend.onrender.com/api/auth/login",
+        formData
+      );
       setToken(res.data.token);
       await loadUser();
       navigate("/dashboard");
@@ -72,7 +80,10 @@ export function AuthProvider({ children }) {
   // Update user profile
   const updateProfile = async (formData) => {
     try {
-      const res = await axios.put(`/api/users/${user._id}`, formData);
+      const res = await axios.put(
+        `https://counseling-app-backend.onrender.com/api/users/${user._id}`,
+        formData
+      );
       setUser(res.data);
     } catch (err) {
       throw err.response.data;
